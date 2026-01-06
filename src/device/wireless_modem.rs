@@ -24,10 +24,10 @@ enum AntennaState {
 //   |                  \   \               |
 //   |        +------>--+   +-->--+         |
 //   |        |                   |         |
-//   |        +-<-   to_ether  -<---+       |
+//   |        +-<-  [to_ether] -<---+       |
 //   |                            | |       |
 //   |                            | |       |
-//   |     ---<---   from_ether <-+ |       |
+//   |     ---<--- [from_ether] <-+ |       |
 //   |     |                        |       |
 //   |     |                        |       |
 //   |     |                        |       |
@@ -130,8 +130,8 @@ impl WirelessModemFake {
 impl IODriverSimulator for WirelessModemFake {
     /// Simulates that the modem emits a byte towards the ether
     /// ```
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let device = WirelessModemFake::new("my_modem");
     /// device.start_tick();
@@ -162,8 +162,8 @@ impl IODriverSimulator for WirelessModemFake {
 
     /// Simulates that the modem caught a byte from the ether
     /// ```
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let device = WirelessModemFake::new("my_modem");
     /// assert_eq!(device.get_from_tx_pin(), None);
@@ -191,8 +191,8 @@ impl IODriverSimulator for WirelessModemFake {
 
     /// Reads a byte on the TX pin
     /// ```
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let device = WirelessModemFake::new("my_modem");
     /// assert_eq!(device.get_from_tx_pin(), None);
@@ -212,8 +212,8 @@ impl IODriverSimulator for WirelessModemFake {
 
     /// Writes a byte on the RX pin
     /// ```
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let device = WirelessModemFake::new("my_modem");
     /// device.put_to_rx_pin(1);
@@ -278,8 +278,8 @@ impl IODriverSimulator for WirelessModemFake {
 
     /// Tells if the device has some bytes to be red from pin
     /// ```
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     /// let mut device = WirelessModemFake::new("");
     /// assert!(
     /// !device.readable());
@@ -299,8 +299,8 @@ impl IODriverSimulator for WirelessModemFake {
 
     /// Tells if the device is ready to be written in
     /// ```
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     /// assert!(WirelessModemFake::new("").writable());
     /// ```
     fn writable(&self) -> bool {
@@ -309,8 +309,8 @@ impl IODriverSimulator for WirelessModemFake {
 
     /// Returns the name of the device
     /// ```
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     /// let device = WirelessModemFake::new("my_modem");
     /// assert_eq!(device.get_name(), "my_modem");
     /// ```

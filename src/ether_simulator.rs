@@ -17,7 +17,7 @@ impl EtherSimulator {
 
     /// Gets the name of the ether
     /// ```
-    /// use network_simulator::EtherSimulator;
+    /// use proto_lab::EtherSimulator;
     /// let mut ether = EtherSimulator::new("my_ether");
     /// assert_eq!(ether.get_name(), "my_ether");
     /// ```
@@ -27,9 +27,9 @@ impl EtherSimulator {
 
     /// Registers a new device (driver / modem)
     /// ```
-    /// use network_simulator::EtherSimulator;
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::EtherSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let mut ether = EtherSimulator::new("my_ether");
     /// ether.register_driver(WirelessModemFake::new("my_modem"));
@@ -42,9 +42,9 @@ impl EtherSimulator {
 
     /// Unregisters a device
     /// ```
-    /// use network_simulator::EtherSimulator;
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::EtherSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let mut ether = EtherSimulator::new("my_ether");
     /// ether.register_driver(WirelessModemFake::new("my_modem"));
@@ -72,9 +72,9 @@ impl EtherSimulator {
 
     /// Gets a registered device
     /// ```
-    /// use network_simulator::EtherSimulator;
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::EtherSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let mut ether = EtherSimulator::new("my_ether");
     /// assert!(ether.get_driver("my_modem").is_none());
@@ -139,9 +139,9 @@ impl EtherSimulator {
     /// Clones itself.
     /// Also makes all internal data shared to be able to use from multiple threads.
     /// ```
-    /// use network_simulator::EtherSimulator;
-    /// use network_simulator::WirelessModemFake;
-    /// use network_simulator::IODriverSimulator;
+    /// use proto_lab::EtherSimulator;
+    /// use proto_lab::WirelessModemFake;
+    /// use proto_lab::IODriverSimulator;
     ///
     /// let mut ether = EtherSimulator::new("my_ether");
     /// let ether_clone = ether.clone();
