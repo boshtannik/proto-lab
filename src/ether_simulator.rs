@@ -221,22 +221,22 @@ mod test {
 
         let mut ether = EtherSimulator::new("ether");
 
-        let modem_1 = WirelessModemFake::new("modem_1");
-        let modem_2 = WirelessModemFake::new("modem_2");
-        let modem_3 = WirelessModemFake::new("modem_3");
+        let sending_modem_1 = WirelessModemFake::new("modem_1");
+        let sending_modem_2 = WirelessModemFake::new("modem_2");
+        let receiving_modem = WirelessModemFake::new("modem_3");
 
-        ether.register_driver(modem_1.clone());
-        ether.register_driver(modem_2.clone());
-        ether.register_driver(modem_3.clone());
+        ether.register_driver(sending_modem_1.clone());
+        ether.register_driver(sending_modem_2.clone());
+        ether.register_driver(receiving_modem.clone());
 
-        let bytes_from_modem_1 = vec![b'a', b'b', b'c', b'd', b'e'];
-        let bytes_from_modem_2 = vec![b'f', b'g', b'h', b'i', b'j'];
+        let bytes_from_senging_modem_1 = vec![b'a', b'b', b'c', b'd', b'e'];
+        let bytes_from_sending_modem_2 = vec![b'f', b'g', b'h', b'i', b'j'];
 
-        for b in bytes_from_modem_1.iter() {
-            modem_1.put_to_rx_pin(*b);
+        for b in bytes_from_senging_modem_1.iter() {
+            sending_modem_1.put_to_rx_pin(*b);
         }
-        for b in bytes_from_modem_2.iter() {
-            modem_2.put_to_rx_pin(*b);
+        for b in bytes_from_sending_modem_2.iter() {
+            sending_modem_2.put_to_rx_pin(*b);
         }
 
         let mut num_caught_from_modem_1: usize = 0;
@@ -246,11 +246,11 @@ mod test {
         ether.start_tick();
         ether.simulate();
         ether.end_tick();
-        while let Some(got_byte) = modem_3.get_from_tx_pin() {
+        while let Some(got_byte) = receiving_modem.get_from_tx_pin() {
             total_bytes_received += 1;
-            if bytes_from_modem_1.contains(&got_byte) {
+            if bytes_from_senging_modem_1.contains(&got_byte) {
                 num_caught_from_modem_1 += 1;
-            } else if bytes_from_modem_2.contains(&got_byte) {
+            } else if bytes_from_sending_modem_2.contains(&got_byte) {
                 num_caught_from_modem_2 += 1;
             } else {
                 panic!("Unexpected scenario. Caught byte which has not been sent");
