@@ -119,6 +119,9 @@ impl WirelessModemFake {
         Ok(())
     }
 
+    /// While clonning - method internally shares data for all clonned
+    /// instances of the modem. So all of them can be used in different
+    /// parts of the program, and even in different threads.
     pub fn clone(&self) -> Self {
         WirelessModemFake {
             arc_mutexed_internal_state: Arc::clone(&self.arc_mutexed_internal_state),

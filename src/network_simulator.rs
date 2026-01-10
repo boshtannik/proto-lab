@@ -82,8 +82,8 @@ impl NetworkSimulator {
             None => panic!(
                 "Simulation thread is started. Can not do start_tick and thread at the same time"
             ),
-            Some(ref ethers) => {
-                for ether in ethers.iter() {
+            Some(ref mut ethers) => {
+                for ether in ethers.iter_mut() {
                     ether.simulate();
                 }
             }
