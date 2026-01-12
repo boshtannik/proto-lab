@@ -1,5 +1,5 @@
 use std::{
-    collections::HashMap,
+    collections::BTreeMap,
     sync::{Arc, Mutex},
 };
 
@@ -129,7 +129,7 @@ impl EtherSimulator {
     /// ```
     fn get_current_byte(&mut self) -> Option<u8> {
         let devices = self.devices.lock().expect("Fail to get lock on devices");
-        let mut broadcasted_data: HashMap<String, u8> = HashMap::new();
+        let mut broadcasted_data: BTreeMap<String, u8> = BTreeMap::new();
 
         // Collect all broadcasts.
         for device in devices.iter() {
@@ -266,6 +266,6 @@ mod test {
         assert!(num_caught_from_modem_2 > 0);
         assert!(num_caught_from_modem_2 < 5);
 
-        assert!(total_bytes_received == 5)
+        assert!(total_bytes_received == 5);
     }
 }
