@@ -51,7 +51,7 @@ fn main() {
         let _ = mesh_node_1.update(&mut driver_1, current_time);
         let _ = mesh_node_2.update(&mut driver_2, current_time);
 
-        if current_time >= 200 {
+        if current_time >= 200 as ms {
             panic!("Simulation timeout");
         }
 

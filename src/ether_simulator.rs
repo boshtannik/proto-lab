@@ -141,9 +141,10 @@ impl EtherSimulator {
             }
         }
 
-        // In case if amount of broadcast devices is grheather than 1 - filters out
-        // data of device which broadcast had registered on the previous iteration
-        // of simulation. This technics simulates data collision.
+        // Deterministic simulation of data collision
+        // In case when multiple devices are broadasting at the same time -
+        // clears out data of device which had broadcast on the previous
+        // iteration of simulation.
         match self.last_broadcasted_device.take() {
             None => (),
             Some(name_of_last_broadcasted) => {
