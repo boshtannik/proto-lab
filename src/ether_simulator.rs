@@ -230,8 +230,8 @@ mod test {
         ether.register_driver(sending_modem_2.clone());
         ether.register_driver(receiving_modem.clone());
 
-        let bytes_from_senging_modem_1 = vec![b'a', b'b', b'c', b'd', b'e'];
-        let bytes_from_sending_modem_2 = vec![b'f', b'g', b'h', b'i', b'j'];
+        let bytes_from_senging_modem_1 = vec![b'1', b'2', b'3', b'4', b'5'];
+        let bytes_from_sending_modem_2 = vec![b'6', b'7', b'8', b'9', b'0'];
 
         for b in bytes_from_senging_modem_1.iter() {
             sending_modem_1.put_to_rx_pin(*b);
@@ -240,33 +240,19 @@ mod test {
             sending_modem_2.put_to_rx_pin(*b);
         }
 
-        let mut num_caught_from_modem_1: usize = 0;
-        let mut num_caught_from_modem_2: usize = 0;
-        let mut total_bytes_received: usize = 0;
+        let mut received_vec: Vec<u8> = vec![];
+        let expected_vec: Vec<u8> = vec![b'1', b'7', b'3', b'9', b'5'];
 
         ether.start_tick();
         ether.simulate();
         ether.end_tick();
         while let Some(got_byte) = receiving_modem.get_from_tx_pin() {
-            total_bytes_received += 1;
-            if bytes_from_senging_modem_1.contains(&got_byte) {
-                num_caught_from_modem_1 += 1;
-            } else if bytes_from_sending_modem_2.contains(&got_byte) {
-                num_caught_from_modem_2 += 1;
-            } else {
-                panic!("Unexpected scenario. Caught byte which has not been sent");
-            }
+            received_vec.push(got_byte);
             ether.start_tick();
             ether.simulate();
             ether.end_tick();
         }
 
-        assert!(num_caught_from_modem_1 > 0);
-        assert!(num_caught_from_modem_1 < 5);
-
-        assert!(num_caught_from_modem_2 > 0);
-        assert!(num_caught_from_modem_2 < 5);
-
-        assert!(total_bytes_received == 5);
+        assert_eq!(received_vec, expected_vec);
     }
 }
